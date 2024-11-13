@@ -19,6 +19,9 @@ mongoose.connect("mongodb://localhost:27017/project",{
 .catch((e)=>{
     console.log("NO connection",e)
 })
+app.use("/",(req,res)=>{
+    res.send("hii")
+})
 
 const bookRoutes = require('./routes/bookRoutes');
 app.use('/books', bookRoutes);
