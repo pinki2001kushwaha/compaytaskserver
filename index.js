@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const Book=require("../server/model/book")
 const app = express();
 const PORT =  5000;
 
@@ -19,9 +19,14 @@ mongoose.connect("mongodb://localhost:27017/project",{
 .catch((e)=>{
     console.log("NO connection",e)
 })
-app.use("/",(req,res)=>{
-    res.send("hii")
-})
+app.use("/",async(req,res)=>{
+    try{
+const result=await Book.find({})
+res.send(result)
+    }
+    catch(error){
+        console.log(error)
+    }})
 
 const bookRoutes = require('./routes/bookRoutes');
 app.use('/books', bookRoutes);
